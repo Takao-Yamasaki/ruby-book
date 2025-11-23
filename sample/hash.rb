@@ -1,9 +1,7 @@
 ######################
 # ハッシュ
+# 実行方法: ruby sample/hash.rb 
 ######################
-# 実行方法
-# ruby lib/hash.rb
-
 # 空のハッシュのクラス名を確認する
 # h = {}
 # p h.class 
@@ -30,7 +28,9 @@ currencies = {'japan' => 'yen', 'us' => 'dollar', 'india' => 'rupee'}
 # ブロックを渡すと見つからない時の戻り値を設定できる
 # p currencies.delete('italy') { |key| "Not found: #{key}"} # "Not found: italy"
 
+######################
 # ハッシュを使った繰り返し処理
+######################
 # currencies.each do |key, value|
 #   puts "#{key} : #{value}"
 # end
@@ -53,7 +53,9 @@ currencies = {'japan' => 'yen', 'us' => 'dollar', 'india' => 'rupee'}
 # {}.size # 0
 # {'x' => 1, 'y' => 2, 'z' => 3}.size # 3
 
+######################
 # シンボル
+######################
 # p :apple.class # Symbol
 # p 'apple'.class # String
 
@@ -92,7 +94,9 @@ currencies = {'japan' => 'yen', 'us' => 'dollar', 'india' => 'rupee'}
 #   p 'もう終わりました'
 # end
 
+######################
 # ハッシュのキーにシンボルを使う
+######################
 # currencies = {:japan => 'yen', :us => 'doller', :india => 'ruppee'}
 # currencies[:italy] = 'euro'
 # p currencies
@@ -125,23 +129,25 @@ currencies = {'japan' => 'yen', 'us' => 'dollar', 'india' => 'rupee'}
 # p person[:friends] 
 # p person[:phones][:mobile]
 
+######################
 # キーワード引数
-def buy_burger(menu, drink: true, potato: true)
-  order = []
-  order.push(menu)
-  if drink
-    order.push("drink")
-  end
-  if potato
-    order.push("potato")
-  end
+######################
+# def buy_burger(menu, drink: true, potato: true)
+#   order = []
+#   order.push(menu)
+#   if drink
+#     order.push("drink")
+#   end
+#   if potato
+#     order.push("potato")
+#   end
   
-  message = ""
-  order.each do |item|
-    message += "#{item} "
-  end
-  puts message + "を購入しました。"
-end
+#   message = ""
+#   order.each do |item|
+#     message += "#{item} "
+#   end
+#   puts message + "を購入しました。"
+# end
 
 # buy_burger("cheese", drink: true, potato: true)
 # buy_burger("fish", drink: true, potato: false)
@@ -152,26 +158,26 @@ end
 # buy_burger('fish', potato: false, drink: true)
 
 # デフォルト値なしのキーワード引数を使ってメソッドを定義する
-def buy_burger2(menu, drink:, potato:)
-  order = []
-  order.push(menu)
-  if drink
-    order.push("drink")
-  end
-  if potato
-    order.push("potato")
-  end
+# def buy_burger2(menu, drink:, potato:)
+#   order = []
+#   order.push(menu)
+#   if drink
+#     order.push("drink")
+#   end
+#   if potato
+#     order.push("potato")
+#   end
   
-  message = ""
-  order.each do |item|
-    message += "#{item} "
-  end
-  puts message + "を購入しました。"
-end
+#   message = ""
+#   order.each do |item|
+#     message += "#{item} "
+#   end
+#   puts message + "を購入しました。"
+# end
 
-buy_burger2("potato", drink: true, potato: true)
+# buy_burger2("potato", drink: true, potato: true)
 # キーワード引数を省略するとエラーになる
 # buy_burger2("fish", potato: false) # missing keyword: :drink (ArgumentError)
 # ハッシュをキーワード引数として渡すことも可能
-params = {drink: true, potato: true}
-buy_burger2("potato", **params)
+# params = {drink: true, potato: true}
+# buy_burger2("potato", **params)

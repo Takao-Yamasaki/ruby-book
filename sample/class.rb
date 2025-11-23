@@ -1,9 +1,7 @@
 ######################
 # クラス
+# 実行方法: ruby sample/class.rb
 ######################
-# 実行方法
-# ruby lib/class.rb
-
 ######################
 # クラスを使わない場合
 ######################
@@ -137,17 +135,17 @@
 ######################
 # 定数
 ######################
-class Product
-  # デフォルトの価格を定数として定義する
-  DEFAULT_PRICE = 0
+# class Product
+#   # デフォルトの価格を定数として定義する
+#   DEFAULT_PRICE = 0
   
-  attr_reader :name, :price
+#   attr_reader :name, :price
 
-  def initialize(name, price = DEFAULT_PRICE)
-    @name = name
-    @price = price
-  end
-end
+#   def initialize(name, price = DEFAULT_PRICE)
+#     @name = name
+#     @price = price
+#   end
+# end
 
-product = Product.new('Alice')
-p product.price # 0が表示される
+# product = Product.new('Alice')
+# p product.price # 0が表示される
