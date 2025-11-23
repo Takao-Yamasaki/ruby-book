@@ -149,3 +149,120 @@
 
 # product = Product.new('Alice')
 # p product.price # 0が表示される
+
+######################
+# selfキーワード
+######################
+# class User
+#   attr_accessor :name
+  
+#   def initialize(name)
+#     @name = name
+#   end
+
+#   # selfなしでnameメソッドを呼び出す
+#   def hello
+#     "Hello, I am #{name}."
+#   end
+
+#   # selfありでnameメソッドを呼び出す
+#   def hi
+#     "Hi, I am #{self.name}."
+#   end
+
+#   # 直接インスタンス変数にアクセスする
+#   def my_name
+#     "My name is #{@name}"
+#   end
+
+#   # NOTE:セッターの場合はselfを明示的に付ける必要がある
+#   # selfなしでnameメソッドを呼び出す。ローカル変数に代入されたものと見做される
+#   def rename_to_bob
+#     name = 'Bob' # "Bob"
+#   end
+
+#   # selfありでnameメソッドを呼び出す
+#   def rename_to_carol
+#     self.name = 'Carol'
+#   end 
+
+#   # 直接インスタンス変数にアクセスする
+#   def rename_to_dave
+#     @name = 'Dave'
+#   end
+# end
+
+# user = User.new('Alice')
+# p user.hello
+# p user.hi
+# p user.my_name
+
+# user.rename_to_bob
+# p user.name # "Alice"が出力されてしまう
+# user.rename_to_carol
+# p user.name
+# user.rename_to_dave
+# p user.name
+
+######################
+# クラスメソッド内部や構文直下のself
+######################
+# class Foo
+#   # クラス定義の読み込み時に呼び出される
+#   puts "クラス構文直下のself: #{self}"
+  
+#   # NOTE: ここでのselfはクラスメソッドを指す
+#   def self.bar
+#     # puts "クラスメソッド内のself: #{self}"
+#     # クラスメソッドでインスタンスメソッドを呼び出す
+#     # NOTE: ここでのselfはインスタンスメソッドを指すので、エラーとなる
+#     # self.baz
+
+#     puts "hello"
+#   end
+
+#   def baz
+#     # puts "インスタンスメソッド内のself: #{self}"
+#     # インスタンスメソッドからクラスメソッドを呼び出すので、エラーになる
+#     # self.bar
+#   end
+
+#   # クラス構文直下でクラスメソッドを呼び出す
+#   self.bar
+
+#   # クラス定義自体も順次処理されるので、これでも実行できる
+#   3.times do
+#     puts "Hello!"
+#   end
+# end
+# => クラス構文直下のself: Foo
+
+# Foo.bar # クラスメソッド内のself: Foo
+
+# foo = Foo.new 
+# foo.baz # インスタンスメソッド内のself: #<Foo:0x00000001094c5dd8>
+######################
+# クラスメソッドをインスタンスメソッドから呼び出す
+######################
+class Product
+  attr_accessor :name, :price
+
+  def initialize(name, price)
+    @name = name
+    @price = price
+  end
+
+  # 金額を整形するクラスメソッド
+  def self.format_price(price)
+    "#{price}円"
+  end
+
+  def to_s
+    # クラスメソッドをインスタンスメソッドから呼び出す
+    formatted_price = Product.format_price(price)
+    "name: #{name}, price: #{price}"
+  end
+end
+
+product = Product.new('A great movie', 1000)
+p product.to_s
