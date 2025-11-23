@@ -92,3 +92,86 @@ currencies = {'japan' => 'yen', 'us' => 'dollar', 'india' => 'rupee'}
 #   p 'もう終わりました'
 # end
 
+# ハッシュのキーにシンボルを使う
+# currencies = {:japan => 'yen', :us => 'doller', :india => 'ruppee'}
+# currencies[:italy] = 'euro'
+# p currencies
+
+# シンボル値:値でハッシュを作成することができる
+# currencies = {japan: 'yen', us: 'doller', india: 'rupee'}
+# p currencies[:us]
+# ハッシュの値もシンボルの場合
+# currencies = {japan: :yen, us: :doller, india: :rupee}
+# p currencies
+
+# ハッシュのキーに異なるデータ型を混在させる
+# 文字列のキーとシンボルのキーを混在させる（できるだけデータ型は揃えたほうがいい）
+# hash = {'abc' => 123, def: 456}
+# p hash['abc']
+# p hash[:def]
+# ハッシュのキーのデータ型が異なるとnilになってしまう
+# p hash[:abc] # nil
+# p hash['def'] # nil
+
+# ハッシュの値に異なるデータ型を混在させる（よくある）
+# person = {
+#   name: "Alice", # 文字列
+#   age: 20, # 数値
+#   friends: ['Bob', 'Carol'], # 配列
+#   phones: {home: '1234-0000', mobile: '5678-0000'} # ハッシュ
+# }
+
+# p person[:age]
+# p person[:friends] 
+# p person[:phones][:mobile]
+
+# キーワード引数
+def buy_burger(menu, drink: true, potato: true)
+  order = []
+  order.push(menu)
+  if drink
+    order.push("drink")
+  end
+  if potato
+    order.push("potato")
+  end
+  
+  message = ""
+  order.each do |item|
+    message += "#{item} "
+  end
+  puts message + "を購入しました。"
+end
+
+# buy_burger("cheese", drink: true, potato: true)
+# buy_burger("fish", drink: true, potato: false)
+# キーワード引数にはデフォルト値が設定されているので、省略可能
+# buy_burger("fish", potato: false)
+# buy_burger("cheese")
+# 順番の入れ替えも可能
+# buy_burger('fish', potato: false, drink: true)
+
+# デフォルト値なしのキーワード引数を使ってメソッドを定義する
+def buy_burger2(menu, drink:, potato:)
+  order = []
+  order.push(menu)
+  if drink
+    order.push("drink")
+  end
+  if potato
+    order.push("potato")
+  end
+  
+  message = ""
+  order.each do |item|
+    message += "#{item} "
+  end
+  puts message + "を購入しました。"
+end
+
+buy_burger2("potato", drink: true, potato: true)
+# キーワード引数を省略するとエラーになる
+# buy_burger2("fish", potato: false) # missing keyword: :drink (ArgumentError)
+# ハッシュをキーワード引数として渡すことも可能
+params = {drink: true, potato: true}
+buy_burger2("potato", **params)
