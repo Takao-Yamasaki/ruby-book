@@ -34,17 +34,70 @@
 ######################
 # selfを付けてprivateメソッドを呼び出す
 ######################
-class User
-  def hello
-    "Hello, I am #{self.name}."
-  end
+# class User
+#   def hello
+#     "Hello, I am #{self.name}."
+#   end
 
+#   private
+  
+#   def name
+#     'Alice'
+#   end
+# end
+
+# user = User.new
+# puts user.hello
+
+######################
+# privateメソッドはサブクラスでも呼び出せる
+######################
+# class Product
+#   def to_s
+#     # nameは常に"A great movie"になるとは限らない
+#     "name: #{name}"
+#   end
+  
+#   private
+#   # これはprivateメソッド
+#   def name
+#     'A great movie.'
+#   end
+# end
+
+# class DVD < Product
+#   def to_s
+#     # nameはスーパークラスのprivateメソッド
+#     "name: #{self.name}"
+#   end
+
+#   # スーパークラスのprivateメソッドをオーバーライドする
+#   def name
+#     'An awesome film'
+#   end
+# end
+
+# dvd = DVD.new
+# p dvd.to_s # "name: An awesome film"
+
+######################
+# サブクラスでメソッドをオーバーライドすると、可視性も同時に変更できる
+######################
+class Product
   private
   
   def name
-    'Alice'
+    'A great movie'
   end
 end
 
-user = User.new
-puts user.hello
+class DVD < Product
+  public
+
+  def name
+    'An awesome file'
+  end
+end
+
+dvd = DVD.new
+p dvd.name # "An awesome file"
