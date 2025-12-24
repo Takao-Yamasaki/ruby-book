@@ -83,21 +83,59 @@
 ######################
 # サブクラスでメソッドをオーバーライドすると、可視性も同時に変更できる
 ######################
-class Product
-  private
+# class Product
+#   private
   
-  def name
-    'A great movie'
-  end
-end
+#   def name
+#     'A great movie'
+#   end
+# end
 
-class DVD < Product
-  public
+# class DVD < Product
+#   public
 
-  def name
-    'An awesome file'
-  end
-end
+#   def name
+#     'An awesome file'
+#   end
+# end
 
-dvd = DVD.new
-p dvd.name # "An awesome file"
+# dvd = DVD.new
+# p dvd.name # "An awesome file"
+
+######################
+# クラスメソッドはprivateキーワードの下に定義しても、privateにならない
+######################
+# class User
+#   private
+
+#   def self.hello
+#     'Hello!'
+#   end
+# end
+
+# p User.hello
+
+######################
+# クラスメソッドをprivateにしたい場合
+######################
+## 1.class << selfを使う
+# class User
+#   class << self
+#     private
+    
+#     def hello
+#       'Hello'
+#     end
+#   end
+# end
+# User.hello # private method `hello' called for class User (NoMethodError)
+
+## 2.private_class_methodを使う
+# class User
+#   def self.hello
+#     'Hello!'
+#   end
+  
+#   private_class_method :hello
+# end
+# User.hello # private method `hello' called for class User (NoMethodError)
